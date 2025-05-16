@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.mbboard.dto.ConnectCount;
 import com.example.mbboard.dto.Member;
 import com.example.mbboard.service.ILoginService;
+import com.example.mbboard.service.IRootService;
+
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class LoginController {
 	@Autowired ILoginService loginService;
+	@Autowired IRootService rootService;
 
 	@GetMapping("/login")
 	public String login() {
@@ -30,6 +34,15 @@ public class LoginController {
 		// 로그인 성공
 		if (loginMember != null) {
 			session.setAttribute("loginMember", loginMember);
+			
+			// 멤버(ADMIN, MEMBER) 카운트 + 1
+			ConnectCount cc = new ConnectCount();
+			cc.setMemberRole(loginMember.getMemberRole());
+			if (rootService.getConnectCountByKey(cc) == null) {
+				rootService.addConnectCount(cc);
+			} else {
+				rootService.modifyConnectCount(cc);
+			}
 			return "/member/memberHome";
 		}
 

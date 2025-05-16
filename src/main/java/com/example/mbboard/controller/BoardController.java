@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	@Autowired IBoardService boardService;
 	
-	@GetMapping({"/", "/boardList"})
+	@GetMapping("/boardList")
 	public String boardList(Model model
 			, @RequestParam(defaultValue = "1") int currentPage
 			, @RequestParam(defaultValue = "") String searchWord) {
