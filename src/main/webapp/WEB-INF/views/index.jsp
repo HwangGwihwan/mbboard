@@ -51,6 +51,13 @@
     margin-bottom: 10px;
   }
 
+  .number-display {
+    font-size: 3em;
+    font-weight: bold;
+    color: #9b59b6;
+    margin-top: 20px;
+  }
+
   canvas {
     max-width: 100%;
     max-height: 150px;
@@ -59,87 +66,74 @@
 </head>
 <body>
 
-	<a href="/login">로그인</a>
-	<h2>접속자 통계</h2>
+  <a href="/login">로그인</a>
+  <h2>접속자 통계</h2>
 
-	<div class="chart-container">
-		<div class="chart-box">
-			<h3>전체</h3>
-			<canvas id="chartAll"></canvas>
-		</div>
-		<div class="chart-box">
-			<h3>오늘</h3>
-			<canvas id="chartToday"></canvas>
-		</div>
-		<div class="chart-box">
-			<h3>현재 접속자</h3>
-			<canvas id="chartCurrent"></canvas>
-		</div>
-	</div>
+  <div class="chart-container">
+    <!-- 전체 접속자 -->
+    <div class="chart-box">
+      <h3>전체</h3>
+      <canvas id="chartAll"></canvas>
+    </div>
+
+    <!-- 오늘 접속자 -->
+    <div class="chart-box">
+      <h3>오늘</h3>
+      <canvas id="chartToday"></canvas>
+    </div>
+
+    <!-- 현재 접속자 (차트 대신 숫자만 표시) -->
+    <div class="chart-box">
+      <h3>현재 접속자</h3>
+      <div class="number-display">${currentConnectCount}</div>
+    </div>
+  </div>
 
 <script>
-	// 전체 통계
-	const dataAll = {
-		labels: ['ANONYMOUS', 'MEMBER', 'ADMIN'],
-		datasets: [{
-			label: '전체 접속자 수',
-			data: [${connectCountMapAll.ANONYMOUS}, ${connectCountMapAll.MEMBER}, ${connectCountMapAll.ADMIN}],
-			backgroundColor: ['#f39c12', '#2980b9', '#27ae60']
-		}]
-	};
-	new Chart(document.getElementById('chartAll'), {
-		type: 'bar',
-		data: dataAll,
-		options: {
-			scales: {
-				y: { beginAtZero: true }
-			},
-			plugins: {
-				legend: { display: false }
-			}
-		}
-	});
+  // 전체 통계
+  const dataAll = {
+    labels: ['ANONYMOUS', 'MEMBER', 'ADMIN'],
+    datasets: [{
+      label: '전체 접속자 수',
+      data: [${connectCountMapAll.ANONYMOUS}, ${connectCountMapAll.MEMBER}, ${connectCountMapAll.ADMIN}],
+      backgroundColor: ['#f39c12', '#2980b9', '#27ae60']
+    }]
+  };
+  new Chart(document.getElementById('chartAll'), {
+    type: 'bar',
+    data: dataAll,
+    options: {
+      scales: {
+        y: { beginAtZero: true }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
 
-	// 오늘 통계
-	const dataToday = {
-		labels: ['ANONYMOUS', 'MEMBER', 'ADMIN'],
-		datasets: [{
-			label: '오늘 접속자 수',
-			data: [${connectCountMapToday.ANONYMOUS}, ${connectCountMapToday.MEMBER}, ${connectCountMapToday.ADMIN}],
-			backgroundColor: ['#e67e22', '#3498db', '#2ecc71']
-		}]
-	};
-	new Chart(document.getElementById('chartToday'), {
-		type: 'bar',
-		data: dataToday,
-		options: {
-			scales: {
-				y: { beginAtZero: true }
-			},
-			plugins: {
-				legend: { display: false }
-			}
-		}
-	});
-
-	// 현재 접속자
-	const dataCurrent = {
-		labels: ['접속자'],
-		datasets: [{
-			label: '현재 접속자',
-			data: [${currentConnectCount}],
-			backgroundColor: ['#9b59b6']
-		}]
-	};
-	new Chart(document.getElementById('chartCurrent'), {
-		type: 'doughnut',
-		data: dataCurrent,
-		options: {
-			plugins: {
-				legend: { display: true }
-			}
-		}
-	});
+  // 오늘 통계
+  const dataToday = {
+    labels: ['ANONYMOUS', 'MEMBER', 'ADMIN'],
+    datasets: [{
+      label: '오늘 접속자 수',
+      data: [${connectCountMapToday.ANONYMOUS}, ${connectCountMapToday.MEMBER}, ${connectCountMapToday.ADMIN}],
+      backgroundColor: ['#e67e22', '#3498db', '#2ecc71']
+    }]
+  };
+  new Chart(document.getElementById('chartToday'), {
+    type: 'bar',
+    data: dataToday,
+    options: {
+      scales: {
+        y: { beginAtZero: true }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
 </script>
+
 </body>
 </html>

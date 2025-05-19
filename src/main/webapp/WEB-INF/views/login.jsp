@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 	$(function() {
 		$('#btn').click(function() {
@@ -30,7 +29,10 @@
 		<form id="loginForm" action="/login" method="post">
 			<div>
 				<div>memberId:</div>
-				<div><input type="text" id="memberId" name="memberId"></div>
+				<div>
+					<input type="text" id="memberId" name="memberId" value="${cookie.saveId.value}">
+					<input type="checkbox" value="yes" name="saveIdCk">아이디 저장
+				</div>
 				<div>memberPw:</div>
 				<div><input type="password" id="memberPw" name="memberPw"></div>
 				<div><button type="button" id="btn">로그인</button></div>
@@ -40,6 +42,7 @@
 		    <div style="color:red; margin-top:10px;">아이디 또는 비밀번호가 올바르지 않습니다.</div>
 		</c:if>
 		<div><a href="/joinMember">회원가입</a></div>
+		<div><a href="/findMemberPw">비밀번호찾기</a></div>
 	</c:if>
 
 	<c:if test="${loginMember != null}">

@@ -14,4 +14,6 @@ public interface LoginMapper {
 	Member selectMemberOne(String memberId);
 	int insert(Member member);
 	int updateMember(Member member);
+	int updateMemberPwByAmdin(Member member);
+	int updateMemberPw(Member member);
 }

@@ -34,7 +34,6 @@ public class ConnectCountListener implements HttpSessionListener {
     	} else {
     		rootService.modifyConnectCount(cc);
     	}
-    	rootService.getConnectCountByKey(null);
     }
 
 

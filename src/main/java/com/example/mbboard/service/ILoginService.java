@@ -11,5 +11,8 @@ public interface ILoginService {
 	Member selectMemberOne(String memberId);
 	
 	int insert(Member paramMember);
-	public int updateMember(Member paramMember);
+	int updateMember(Member paramMember);
+	
+	void changeMemberPwByAdmin(Member member);
+	int changeMemberPw(Member member);
 }
